@@ -1,7 +1,6 @@
 #!python3
 # https://adventofcode.com/2020/day/4
 
-from pprint import pprint
 import re
 
 
