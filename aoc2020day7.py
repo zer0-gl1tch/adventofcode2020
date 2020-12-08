@@ -7,23 +7,25 @@ FILENAME = 'day7input.txt'
 puzzleInput = open(FILENAME, 'r')
 rules = puzzleInput.readlines()
 
+
 def whichOnesCanContain(color):
-	global bagsDict
-	result = []
-	for rule in bagsDict:
-		if color in bagsDict[rule].keys():
-			result.append(rule)
-	for res in result:
-		result = result + whichOnesCanContain(res)
-	return list(set(result))
+    global bagsDict
+    result = []
+    for rule in bagsDict:
+        if color in bagsDict[rule].keys():
+            result.append(rule)
+    for res in result:
+        result = result + whichOnesCanContain(res)
+    return list(set(result))
 
 
 def numberBagsInside(color):
-	global bagsDict
-	result = 0
-	for rule in bagsDict[color]:
-		result = result + bagsDict[color][rule] + bagsDict[color][rule] * numberBagsInside(rule)
-	return result
+    global bagsDict
+    result = 0
+    for rule in bagsDict[color]:
+        result = result + bagsDict[color][rule] + \
+            bagsDict[color][rule] * numberBagsInside(rule)
+    return result
 
 
 regexExtBag = re.compile(r'^(.+)\sbags?\scontain')
@@ -32,11 +34,11 @@ regexIntBag = re.compile(r'(\d)\s(.+?)\sbags?')
 bagsDict = {}
 
 for rule in rules:
-	containedBags = {}
-	for bagColor in regexIntBag.findall(rule):
-		containedBags[bagColor[1]] = int(bagColor[0])
+    containedBags = {}
+    for bagColor in regexIntBag.findall(rule):
+        containedBags[bagColor[1]] = int(bagColor[0])
 
-	bagsDict[regexExtBag.search(rule).group(1)] = containedBags
+    bagsDict[regexExtBag.search(rule).group(1)] = containedBags
 
 mybag = 'shiny gold'
 
