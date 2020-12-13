@@ -78,7 +78,6 @@ ferry2 = ship('E')
 wp = waypoint(10, 1)
 
 for direction in directions:
-
     if direction[0] == 'F':
         ferry2.changePos('E', int(direction[1:]) * wp.x)
         ferry2.changePos('N', int(direction[1:]) * wp.y)
